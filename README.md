@@ -38,3 +38,13 @@ The output can be streamed to the user.
 See code [here](./agent-rag-chat-tools-gpt4-streaming/index.ts)
 Run with `ts-node agent-rag-chat-tools-gpt4-streaming`
 </details>
+
+## Disclaimer
+
+Running those scripts will incur service fees from Anthropic/OpenAI.
+Results are not guaranteed, this repo should be used only as a list of examples that can be adapted to specific use cases.
+
+## Sources
+
+Most of the code comes and is based from the langchain [documentation](https://js.langchain.com/docs/modules/agents/quick_start).
+Make sure to check it out.
