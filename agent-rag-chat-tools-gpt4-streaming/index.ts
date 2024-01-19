@@ -45,7 +45,11 @@ export async function main() {
 	const retrieverTool = await getRetrieverTool();
 	const tools = [new TavilySearchResults({ maxResults: 2 }), retrieverTool];
 
-	const llm = new ChatOpenAI({ modelName: "gpt-4", temperature: 0 });
+	const llm = new ChatOpenAI({
+		modelName: "gpt-4",
+		temperature: 0,
+		streaming: true,
+	});
 	const prompt = await pull<ChatPromptTemplate>(
 		"hwchase17/openai-functions-agent",
 	);
@@ -65,7 +69,7 @@ export async function main() {
 		// this is to check that the tool `TavilySearchResults` is working
 		"And what's the weather in Paris ?";
 
-	const result = await agentExecutor.invoke({
+	const logStream = await agentExecutor.streamLog({
 		input: question,
 		chat_history: [
 			new HumanMessage("hi! my name is Cob."),
@@ -73,15 +77,33 @@ export async function main() {
 		],
 	});
 
-	console.log(result);
+	for await (const chunk of logStream) {
+		if (chunk.ops?.length > 0 && chunk.ops[0].op === "add") {
+			const addOp = chunk.ops[0];
+			if (
+				addOp.path.startsWith("/logs/ChatOpenAI") &&
+				typeof addOp.value === "string" &&
+				addOp.value.length
+			) {
+				process.stdout.write(addOp.value);
+			}
+		}
+	}
+
+	/** the following output is streamed to the console: */
+
 	/**
-	 * Hello Cob! LangSmith can be a great help with testing. It provides several features that can assist in debugging, monitoring, and improving the performance of your application. \n' +
-    '\n' +
-    'For debugging, LangSmith can help you understand the exact input to the Language Model (LLM), why an agent is looping, why a chain was slower than expected, and how many tokens an agent used. It can also help you monitor your application in production by logging all traces, visualizing latency and token usage statistics, and troubleshooting specific issues as they arise. \n' +
-    '\n' +
-    'LangSmith also allows you to associate feedback programmatically with runs. If your application has a thumbs up/down button on it, you can use that to log feedback back to LangSmith. This can be used to track performance over time and pinpoint underperforming data points, which you can subsequently add to a dataset for future testing.\n' +
-    '\n' +
-    "As for the weather in Paris, it is currently sunny with a temperature of 3.0°C (37.4°F). The wind is coming from the NNE at 6.8 kph (4.3 mph). The humidity is at 70%. Please note that weather conditions can change rapidly, so it's always a good idea to check a reliable source shortly before you go out.
+	 * Hello Cob! LangSmith can be a great tool for testing. It provides several features that can help with this process:
+
+	1. Debugging: LangSmith can help you understand unexpected results, why an agent is looping, why a chain was slower than expected, and how many tokens an agent used. It can provide insights into the exact input to the Language Model and help you understand the inputs and outputs better.
+
+	2. Monitoring: Once your application is in production, LangSmith can be used to monitor your application. You can log all traces, visualize latency and token usage statistics, and troubleshoot specific issues as they arise. 
+
+	3. Feedback: LangSmith allows you to associate feedback programmatically with runs. If your application has a feedback button, you can use that to log feedback back to LangSmith. This can be used to track performance over time and pinpoint underperforming data points, which you can subsequently add to a dataset for future testing.
+
+	4. Exporting datasets: LangSmith makes it easy to curate datasets. These datasets can be exported for use in other contexts, such as OpenAI Evals or fine-tuning.
+
+	As for the weather in Paris, it is currently sunny with a temperature of 3.0°C (37.4°F). The wind is coming from the NNE at 6.8 kph (4.3 mph). The humidity is at 70%.
 	 */
 }
 
@@ -89,5 +111,7 @@ export async function main() {
  * Before running this agent, make sure to have the necessary environment variables:
  * - `OPENAI_API_KEY`
  * - `TAVILY_API_KEY`
+ *
+ * Reference: https://js.langchain.com/docs/modules/agents/how_to/streaming
  */
 main();
