@@ -15,17 +15,26 @@ Run the agent script you want to try `ts-node agent-rag-chat-tools-gpt4`
 Here's the list of templates currenlty available. Feel free to open up a PR to add one.
 
 <details>
-<summary>agent-rag-chat-tools-gpt4</summary>
+<summary>`agent-rag-chat-tools-gpt4`</summary>
 Conversational agent with document retriever, and web tool. Using OpenAI's GPT4 model.
+
+See code [here](./agent-rag-chat-tools-gpt4/index.ts)
+Run with `ts-node agent-rag-chat-tools-gpt4`
 </details>
 
 <details>
-<summary>agent-rag-chat-tools-claude</summary>
+<summary>`agent-rag-chat-tools-claude`</summary>
 Conversational agent with document retriever, and web tool. Using Anthropic's Claude 2.1 model.
+
+See code [here](./agent-rag-chat-tools-claude/index.ts)
+Run with `ts-node agent-rag-chat-tools-claude`
 </details>
 
 <details>
-<summary>agent-rag-chat-tools-gpt4-streaming</summary>
+<summary>`agent-rag-chat-tools-gpt4-streaming`</summary>
 Conversational agent with document retriever, and web tool. Using OpenAI's GPT4 model.
 The output can be streamed to the user.
+
+See code [here](./agent-rag-chat-tools-gpt4-streaming/index.ts)
+Run with `ts-node agent-rag-chat-tools-gpt4-streaming`
 </details>
