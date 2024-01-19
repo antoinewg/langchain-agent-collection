@@ -1,3 +1,7 @@
+import dotenv from "dotenv";
+
+dotenv.config()
+
 export async function main() {
   console.log("Hello from agent agent-rag-chat-tools-gpt4 !")
 }
