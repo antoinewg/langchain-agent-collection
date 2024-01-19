@@ -7,7 +7,7 @@ export async function main() {
 }
 
 /**
- * Before running this agent, make sure to have the necessary environement variables:
+ * Before running this agent, make sure to have the necessary environment variables:
  * - `ANTHROPIC_API_KEY`
  * - `TAVILY_API_KEY`
  */
