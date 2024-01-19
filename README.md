@@ -18,14 +18,14 @@ Here's the list of templates currenlty available. Feel free to open up a PR to a
 
 Conversational agent with document retriever, and web tool. Using OpenAI's GPT4 model.
 
-See code [here](./agent-rag-chat-tools-gpt4/index.ts)
+See code [here](./agent-rag-chat-tools-gpt4/index.ts).
 Run with `ts-node agent-rag-chat-tools-gpt4`
 
 ### `agent-rag-chat-tools-claude`
 
 Conversational agent with document retriever, and web tool. Using Anthropic's Claude 2.1 model.
 
-See code [here](./agent-rag-chat-tools-claude/index.ts)
+See code [here](./agent-rag-chat-tools-claude/index.ts).
 Run with `ts-node agent-rag-chat-tools-claude`
 
 ### `agent-rag-chat-tools-gpt4-streaming`
@@ -33,7 +33,7 @@ Run with `ts-node agent-rag-chat-tools-claude`
 Conversational agent with document retriever, and web tool. Using OpenAI's GPT4 model.
 The output can be streamed to the user.
 
-See code [here](./agent-rag-chat-tools-gpt4-streaming/index.ts)
+See code [here](./agent-rag-chat-tools-gpt4-streaming/index.ts).
 Run with `ts-node agent-rag-chat-tools-gpt4-streaming`
 
 ## Disclaimer
