@@ -19,6 +19,7 @@
     "langchain": "^0.1.4"
   },
   "devDependencies": {
+    "@biomejs/biome": "1.5.2",
     "@types/node": "^20.11.5"
   }
 }
