@@ -44,9 +44,7 @@ export async function main() {
 	const tools = [new TavilySearchResults({ maxResults: 2 }), retrieverTool];
 
 	const llm = new ChatAnthropic({ modelName: "claude-2.1", temperature: 0 });
-	const prompt = await pull<ChatPromptTemplate>(
-		"hwchase17/xml-agent-convo",
-	);
+	const prompt = await pull<ChatPromptTemplate>("hwchase17/xml-agent-convo");
 	const agent = await createXmlAgent({ llm, tools, prompt });
 
 	const agentExecutor = new AgentExecutor({
@@ -65,7 +63,8 @@ export async function main() {
 
 	const result = await agentExecutor.invoke({
 		input: question,
-		chat_history: "Human: Hi! My name is Cob\nAI: Hello Cob! How can I assist you today?"
+		chat_history:
+			"Human: Hi! My name is Cob\nAI: Hello Cob! How can I assist you today?",
 	});
 
 	console.log(result);
